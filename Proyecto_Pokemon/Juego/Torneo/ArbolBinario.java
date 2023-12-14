@@ -36,38 +36,39 @@ public class ArbolBinario {
 
     public void realizarTorneo() {
         System.out.println("\nComienza el torneo:");
-        realizarRondas(getRaiz());
+        realizarRondas(getRaiz(), 16);
     }
 
-    private void realizarRondas(NodoB nodo) {
-        if (nodo == null) {
+    private void realizarRondas(NodoB nodo, int numJugadores) {
+        if (nodo == null || numJugadores < 1) {
             return;
         }
 
-        NodoB ganadorRonda1 = realizarRonda(nodo);
-        NodoB ganadorRonda2 = realizarRonda(ganadorRonda1);
-        NodoB ganadorRonda3 = realizarRonda(ganadorRonda2);
+        int batallas = numJugadores / 2;
+        int numRonda = 1;
 
-        System.out.println("\nRonda 1:");
-        System.out.println("Ganador: " + ganadorRonda1.getNombre());
+        while (batallas >= 1) {
+            System.out.println("\nRonda " + numRonda + ":");
+            for (int i = 0; i < batallas; i++) {
+                NodoB jugador1 = determinarGanador(nodo);
+                NodoB jugador2 = determinarGanador(nodo);
+                System.out.println("Jugador " + jugador1.getNombre() + " vs Jugador " + jugador2.getNombre());
+            }
+            numRonda++;
+            batallas /= 2;
+        }
 
-        System.out.println("\nRonda 2:");
-        System.out.println("Ganador: " + ganadorRonda2.getNombre());
-
-        System.out.println("\nRonda 3:");
-        System.out.println("Ganador: " + ganadorRonda3.getNombre());
-
-        System.out.println("\nRonda 4:");
-        System.out.println("¡El ganador del torneo es " + nodo.getNombre() + "!");
+        NodoB ganador = determinarGanador(nodo);
+        System.out.println("\nRonda " + numRonda + ":");
+        System.out.println("¡El ganador del torneo es " + ganador.getNombre() + "!");
     }
 
-    private NodoB realizarRonda(NodoB nodo) {
+    private NodoB determinarGanador(NodoB nodo) {
         if (nodo == null) {
             return null;
         }
 
         while (nodo.getHijoIzq() != null && nodo.getHijoDer() != null) {
-            System.out.println("Jugador " + nodo.getHijoIzq().getNombre() + " vs Jugador " + nodo.getHijoDer().getNombre());
             if (Math.random() < 0.5) {
                 nodo = nodo.getHijoIzq();
             } else {
