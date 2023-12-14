@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+
 public class Batalla {
     private Jugador jugador1;
     private Jugador jugador2;
@@ -35,7 +36,7 @@ public class Batalla {
     }
 
     public void iniciarBatalla() {
-        ReproductorSonido.reproducirSonidoWAV("D:\\mkel5\\Documents\\NetBeansProjects\\Pokemon2\\y2mate.bz-pokeball-opening-sound-FX.wav");
+        ReproductorSonido.reproducirSonidoWAV("D:\\Descargas\\Pokemon interfaz\\Pokemon(Avance de Proyecto)\\Pokemon2\\y2mate.bz-pokeball-opening-sound-FX.wav");
         try {
             Thread.sleep(3500);
         } catch (InterruptedException e) {
@@ -44,7 +45,6 @@ public class Batalla {
         batallar(jugador1, jugador2);
         batallar(jugador1, jugador3);
         batallar(jugador1, jugador4);
-        determinarGanadorFinal();
         this.frame.setVisible(true);
         textArea.append("¡Comienza la batalla!\n");
 
@@ -57,7 +57,8 @@ public class Batalla {
             Thread.sleep(500);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }    
+        }   
+        determinarGanadorFinal();
     }
     
     private void batallar(Jugador atacante, Jugador defensor) {
@@ -179,8 +180,3 @@ public class Batalla {
         return jugador1.getPokedex().areAlivePokemon() && jugador2.getPokedex().areAlivePokemon();
     }
 }
-
-
-
-}
-
